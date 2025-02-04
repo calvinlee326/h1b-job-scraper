@@ -2,7 +2,7 @@ name: Daily H1B Data Scraper
 
 on:
   schedule:
-    - cron: '0 16 * * *'  # every day at 9:00 UTC
+    - cron: '0 16 * * *'  # Los Angeles 9:00 AM (UTC-7/8)
   workflow_dispatch:     # allow manual trigger
 
 jobs:
@@ -17,6 +17,11 @@ jobs:
       with:
         python-version: '3.12.4'
 
+    - name: Create directories
+      run: |
+        mkdir -p data
+        mkdir -p docs
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -30,6 +35,5 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add data/h1b_companies.csv docs/salary_distribution.png
-        git commit -m "Auto-update H1B data and visualization"
-        git push origin main
+        git add -A  # add all changes
+        git diff --staged --quiet || (git commit -m "Auto-update H1B data and visualization" && git push origin main) 
