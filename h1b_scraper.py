@@ -1,6 +1,7 @@
 import requests # to make HTTP requests
 from bs4 import BeautifulSoup # to parse HTML content
 import pandas as pd # to handle data
+import matplotlib.pyplot as plt # to create plots
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -36,7 +37,20 @@ def scrape_h1b_jobs():
             companies.append(company)
     return companies
 
+def analyze_data(df):
+    print("\n--- Data Analysis ---")
+    print(df.describe())
     
+    # Calculate the average salary by company
+    df['Average Salary'] = df['Average Salary'].replace('[\$,]', '', regex=True).astype(float)
+    df['Average Salary'].plot(kind='hist', bins=20)
+    plt.title('H1B Company Average Salary Distribution')
+    plt.xlabel('Average Salary')
+    plt.ylabel('Company Count')
+    plt.tight_layout()
+    
+    plt.savefig('salary_distribution.png')
+    plt.show()
     
             
 if __name__ == "__main__":
@@ -44,6 +58,7 @@ if __name__ == "__main__":
     if companies:
         df = pd.DataFrame(companies)
         df.to_csv("h1b_companies.csv", index=False)
+        analyze_data(df)
         print(f"{len(df)} counts data saved to h1b_companies.csv")
     else:
         print("No data was scraped.")
