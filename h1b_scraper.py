@@ -2,8 +2,7 @@ import requests # to make HTTP requests
 from bs4 import BeautifulSoup # to parse HTML content
 import pandas as pd # to handle data
 import matplotlib.pyplot as plt # to create plots
-import schedule # to schedule tasks
-import time # to handle time-related operations
+
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -44,7 +43,7 @@ def analyze_data(df):
     print(df.describe())
     
     # Calculate the average salary by company
-    df['Average Salary'] = df['Average Salary'].replace('[\$,]', '', regex=True).astype(float)
+    df['Average Salary'] = df['Average Salary'].replace(r'[$,]', '', regex=True).astype(float)
     df['Average Salary'].plot(kind='hist', bins=20)
     plt.title('H1B Company Average Salary Distribution')
     plt.xlabel('Average Salary')
@@ -69,19 +68,6 @@ def daily_task():
 if __name__ == "__main__":
     daily_task()
     
-    schedule_mode = input("Do you want to run in schedule mode? (y/n): ").lower()
     
-    if schedule_mode == "y":
-        schedule.every().day.at("08:00").do(daily_task)
-        print("Daily task scheduled to run at 08:00 every day.")
-        
-        try:
-            while True:
-                schedule.run_pending()
-                time.sleep(60)
-        except KeyboardInterrupt:
-            print("Program terminated by user.")
-    else:
-        print("Mission Completed, Program Terminated.")
         
 

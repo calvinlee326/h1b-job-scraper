@@ -6,7 +6,7 @@
 An automated solution for tracking U.S. H1B visa job opportunities in real-time
 
 ## 📊 Real-time Data Visualization
-![Salary Distribution](docs/screenshot.png)
+![Salary Distribution](h1b-job-scraper/salary_distribution.png)
 
 ## 🛠️ Quick Start
 ```bash
