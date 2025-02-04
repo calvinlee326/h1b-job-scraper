@@ -2,7 +2,7 @@ import requests # to make HTTP requests
 from bs4 import BeautifulSoup # to parse HTML content
 import pandas as pd # to handle data
 import matplotlib.pyplot as plt # to create plots
-
+import os
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -49,8 +49,8 @@ def analyze_data(df):
     plt.xlabel('Average Salary')
     plt.ylabel('Company Count')
     plt.tight_layout()
-    
-    plt.savefig('salary_distribution.png')
+    os.makedirs('docs', exist_ok=True)
+    plt.savefig('docs/salary_distribution.png')
     plt.close()
     # plt.show()
     
@@ -59,7 +59,8 @@ def daily_task():
     companies = scrape_h1b_jobs()
     if companies:
         df = pd.DataFrame(companies)
-        df.to_csv("h1b_companies.csv", index=False)
+        os.makedirs('data', exist_ok=True)
+        df.to_csv("data/h1b_companies.csv", index=False)
         analyze_data(df)
         print(f"{len(df)} counts data saved to h1b_companies.csv")
     else:

@@ -30,6 +30,6 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add h1b_companies.csv salary_distribution.png
+        git add data/h1b_companies.csv docs/salary_distribution.png
         git commit -m "Auto-update H1B data and visualization"
-        git push
+        git push origin main
