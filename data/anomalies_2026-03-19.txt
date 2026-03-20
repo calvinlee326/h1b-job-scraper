@@ -1,0 +1,6 @@
+H1B Anomaly Report — 2026-03-19
+==================================================
+
+Companies analyzed : 5
+Outliers (|z| > 2.5): 0
+
