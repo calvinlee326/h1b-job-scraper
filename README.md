@@ -22,6 +22,12 @@ An automated solution for tracking U.S. H1B visa job opportunities in real-time.
 ```bash
 git clone https://github.com/calvinlee326/h1b-job-scraper.git
 cd h1b-job-scraper
+
+# Create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate       # macOS/Linux
+# .venv\Scripts\activate        # Windows
+
 pip install -r requirements.txt
 python h1b_scraper.py
 ```
@@ -60,6 +66,26 @@ python h1b_scraper.py
 
 ---
 
+## 📂 Project Structure
+
+```
+h1b-job-scraper/
+├── .github/workflows/
+│   └── daily-scrape.yml   # GitHub Actions — runs daily at 9 AM PST
+├── data/
+│   ├── h1b_companies.csv              # latest scrape
+│   ├── h1b_companies_YYYY-MM-DD.csv   # daily archives
+│   ├── h1b_predictions.csv            # attractiveness scores
+│   └── anomalies_YYYY-MM-DD.txt       # anomaly reports
+├── docs/
+│   ├── salary_distribution.png
+│   └── h1b_scores.png
+├── h1b_scraper.py
+└── requirements.txt
+```
+
+---
+
 ## 🤝 Contributing
 
-PRs are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
+PRs are welcome!

@@ -12,7 +12,7 @@ headers = {
 
 def scrape_h1b_jobs():
     url = "https://h1bdata.info/topcompanies.php"
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=30)
 
     if response.status_code != 200:
         print(f"Failed to retrieve data from {url}")

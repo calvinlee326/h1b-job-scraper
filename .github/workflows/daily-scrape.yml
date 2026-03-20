@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: write
-  actions: write
-  checks: write 
 
 jobs:
   scrape:
@@ -42,5 +40,5 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add -A  # add all changes
+        git add data/ docs/
         git diff --staged --quiet || (git commit -m "Auto-update H1B data and visualization" && git push origin main) 
